@@ -2,9 +2,6 @@ import pandas as pd
 import openai
 import os
 
-# --- Important: Your OpenAI API key goes here ---
-# During development, put your actual key here.
-# Before submitting, remember to change it back to "YOUR API KEY" as a placeholder.
 openai.api_key = "voc-2064621629126677393550067da90ba9cf680.63522755"
 # --- End of API Key section ---
 
@@ -22,8 +19,7 @@ try:
     df = pd.read_csv('data/2023_fashion_trends.csv')
 except FileNotFoundError:
     print("Oops! '2023_fashion_trends.csv' not found. Make sure it's in a 'data' folder.")
-    # If the file isn't there, we'll create some dummy data so the code can still run
-    # and demonstrate the process.
+    
     dummy_data = {
         'source_url': ['https://example.com/trend1', 'https://example.com/trend2'],
         'article_title': ['The Rise of Comfort Wear', 'Sustainable Style Dominates'],
@@ -35,12 +31,9 @@ except FileNotFoundError:
     df = pd.DataFrame(dummy_data)
 
 
-# Our chatbot needs a 'text' column, so let's rename 'text_snippet'.
+# Chatbot needs a 'text' column,  let's rename 'text_snippet'.
 df = df.rename(columns={'text_snippet': 'text'})
 
-# If needed, you could combine other columns (like 'article_title') with 'text'
-# to add more context to the information the chatbot will see.
-# For example: df['text'] = df['article_title'] + ". " + df['text']
 
 # Quick peek at the data to ensure it's loaded correctly.
 print("Here's how our fashion data looks after preparation:")
@@ -51,7 +44,7 @@ print(f"\nTotal trend snippets loaded: {len(df)}.")
 
 # This function helps us find relevant snippets from our DataFrame for a given query.
 # For this project, we're doing a simple keyword search.
-# In a more advanced system, you'd use something like text embeddings for smarter matching.
+# In a more advanced system,we use something like text embeddings for smarter matching.
 def get_relevant_text(query, dataframe, top_n=3):
     """
     Finds and returns relevant text snippets from the DataFrame based on keywords in the query.
