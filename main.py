@@ -2,7 +2,7 @@ import pandas as pd
 import openai
 import os
 
-openai.api_key = "voc-2064621629126677393550067da90ba9cf680.63522755"
+openai.api_key = "YOUR API KEY"
 # --- End of API Key section ---
 
 # --- Dataset Selection and Scenario Explanation ---
